@@ -1,1 +1,1 @@
-A simple DotFile repositorie
+A simple DotFile repository
