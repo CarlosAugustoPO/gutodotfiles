@@ -153,7 +153,7 @@ vnoremap <C-s>
 
 vnoremap <Enter>
   \ "yy <Bar> :call system('xclip -sel clip', @y)<CR><C-l><bar>
-  \ :echo "Cp done!"<CR>
+  \ :echo "Copy done!"<CR>
 
 vnoremap +
   \ <esc>:resize +2<CR>
@@ -237,6 +237,8 @@ com! Ag
   \ call MySearch()
 
 " More Maps on
+" zg to add word to my words list
+" 2zg to add word to ignore list
 " Bclose on $HOME/.vim/scripts/Bclose.vim
 " DiffNow on $HOME/.vim/scripts/diff_save.vim
 " DiffSaved on $HOME/.vim/scripts/diff_save.vim
