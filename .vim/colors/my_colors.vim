@@ -55,6 +55,7 @@ hi WarningMsg ctermfg=red ctermbg=none
 hi Ignore ctermfg=red
 hi Question ctermfg=red
 hi SpellBad ctermfg=black ctermbg=red cterm=underline
+hi SpellCap ctermfg=none ctermbg=none
 
 hi StatusLine ctermfg=236 ctermbg=249
 hi StatusLineNC ctermfg=236 ctermbg=249
