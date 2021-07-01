@@ -1,0 +1,17 @@
+#!/bin/bash
+
+#FG Colours
+color_fg_none="\e[0m"
+color_fg_lightBlue="\e[38;5;75m"
+color_fg_lightPink="\e[38;5;211m"
+
+
+echo -e "\
+$color_fg_lightBlue tarefas $color_fg_lightPink [lista todas as tarefas] $color_fg_none 
+$color_fg_lightBlue tarefasdodia $color_fg_lightPink [lista as tarefas do dia atual] $color_fg_none 
+$color_fg_lightBlue tarefasde $color_fg_lightPink [mostra a tarefa de determinado dia] $color_fg_none
+$color_fg_lightBlue tarefanow $color_fg_lightPink [mostra a tarefa do momento] $color_fg_none
+$color_fg_lightBlue proxtarefa $color_fg_lightPink [mostra a próxima tarefa] $color_fg_none
+$color_fg_lightBlue tarefadas $color_fg_lightPink [mostra a tarefa de determinada hora] $color_fg_none
+$color_fg_lightBlue horade $color_fg_lightPink [mostra a palavha chave nas tarefas diarias] $color_fg_none
+$color_fg_lightBlue etarefas $color_fg_lightPink [edita a lita de tarefas] $color_fg_none " 

@@ -1,0 +1,69 @@
+#!/bin/bash
+
+#FG Colours
+color_fg_none="\e[0m"
+color_fg_lightGreen="\e[38;5;47m"
+color_fg_lightBlue="\e[38;5;75m"
+color_fg_lightYellow="\e[38;5;229m"
+color_fg_lightPink="\e[38;5;211m"
+color_fg_lightPurple="\e[38;5;163m"
+color_fg_red="\e[38;5;196m"
+
+#BG Colours
+color_bg_purple="\e[48;5;54m"
+
+dia="$(date +%A)"
+horaatual="$(date +%H:%M)"
+
+tarefanow=$( tarefadas $horaatual )
+tarefaln1=$( tarefadas $horaatual | awk 'FNR==1')
+tarefaln2=$( tarefadas $horaatual | awk 'FNR==2')
+proxtarefa=$( tarefasdodia | awk "\$2 > \"$horaatual\" && \$2 !~ \"$dia\" " | awk 'FNR==1' )
+proxtarefahour=$( tarefasdodia | awk "\$2 > \"$horaatual\" && \$2 !~ \"$dia\" " | awk 'FNR==1' | awk '{ print $2 }' )
+primeiratarefa=$( tarefasde ama | awk 'FNR==2' )
+primeiratarefahour=$(  tarefasde ama | awk 'FNR==2 { print $2 }' )
+
+old=$horaatual
+new=$proxtarefahour
+
+if [ "$new" == "" ]; then
+  new=$primeiratarefahour
+else
+  new=$proxtarefahour
+fi
+
+if [[ $old > $new ]]; then
+ old=00:00;
+ catproxtarefa=$primeiratarefa
+ time_now_in_sec=$(date +%s)
+ midnight=$(date -d "tomorrow 00:00" +%s)
+ minutes_left_to_midnight=$(((midnight - time_now_in_sec) / 60))
+else
+ minutes_left_to_midnight="0"
+ catproxtarefa=$proxtarefa
+fi
+
+IFS=: read old_hour old_min <<< "$old"
+IFS=: read hour min <<< "$new"
+
+# convert the date "1970-01-01 hour:min:00" in seconds from Unix EPOCH time
+sec_old=$(date -d "1970-01-01 $old_hour:$old_min:00" +%s);
+sec_new=$(date -d "1970-01-01 $hour:$min:00" +%s);
+sec_mid=$(( ($minutes_left_to_midnight * 60 ) ));
+total_minutes=$(( (sec_new - (sec_old - sec_mid)) / 60));
+final_hour=$(( total_minutes / 60 ));
+final_minute=$(( total_minutes - final_hour * 60 ));
+if [[ $final_hour = 0 ]]; then
+ final_hour=""
+ hsym=""
+else
+ hsym="h"
+fi 
+msym="m"
+
+echo -e "$tarefaln1"
+echo -e "$tarefaln2"
+echo -e "\
+$color_fg_lightYellow Próxima em\
+$color_fg_lightGreen $final_hour$hsym$final_minute$msym"
+echo -e "$catproxtarefa"

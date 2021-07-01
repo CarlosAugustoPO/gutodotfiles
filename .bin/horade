@@ -1,0 +1,54 @@
+#!/bin/bash
+#FG Colours
+color_fg_none="\e[0m"
+color_fg_lightGreen="\e[38;5;47m"
+color_fg_lightBlue="\e[38;5;75m"
+color_fg_lightYellow="\e[38;5;229m"
+color_fg_lightPink="\e[38;5;211m"
+color_fg_lightPurple="\e[38;5;163m"
+color_fg_red="\e[38;5;196m"
+
+#BG Colours
+color_bg_purple="\e[48;5;54m"
+
+if [[ "$1" == "" ]]; then
+  echo -e "$color_fg_lightYellow Por favor, insira um termo para buscar entre as tarefas. $color_fg_none
+  $color_fg_lightBlue Ex:$color_fg_lightYellow$ horade$color_fg_lightGreen programar $color_fg_none"
+else
+  if [[ "$2" == "" ]]; then
+    complemento="hoj"
+  else
+    complemento="$2"
+  fi  
+
+  if [[ "${complemento}" != "hoj" ]] && [[ "${complemento}" != "ama" ]] && [[ "${complemento}" != "ont" ]] && [[ "${complemento}" != "seg" ]] && [[ "${complemento}" != "ter" ]] && [[ "${complemento}" != "qua" ]] && [[ "${complemento}" != "qui" ]] && [[ "${complemento}" != "sex" ]] && [[ "${complemento}" != "sab" ]] && [[ "${complemento}" != "dom" ]]; then
+	  echo -e "\
+
+$color_fg_lightYellow Por favor use três letras para epecificar o dia
+	    
+$color_fg_lightBlue Opções:
+$color_fg_lightGreen hoj $color_fg_lightPink #Exibe as tarefas de hoje ($(date | awk '{print $1}'))
+$color_fg_lightGreen ama $color_fg_lightPink #Exibe as tarefas de amanhã ($(date -d "+1 days" | awk '{print $1}'))
+$color_fg_lightGreen ont $color_fg_lightPink #Exibe as tarefas de ontem ($(date -d "-1 days" | awk '{print $1}'))
+$color_fg_lightGreen seg $color_fg_lightPink #Exibe as tarefas de Segunda
+$color_fg_lightGreen ter $color_fg_lightPink #Exibe as tarefas de Terça
+$color_fg_lightGreen qua $color_fg_lightPink #Exibe as tarefas de Quarta
+$color_fg_lightGreen qui $color_fg_lightPink #Exibe as tarefas de Quinta
+$color_fg_lightGreen sex $color_fg_lightPink #Exibe as tarefas de Sexta
+$color_fg_lightGreen sab $color_fg_lightPink #Exibe as tarefas de Sábado
+$color_fg_lightGreen dom $color_fg_lightPink #Exibe as tarefas de Domingo
+
+$color_fg_lightBlue Ex:$color_fg_lightYellow$ horade$color_fg_lightGreen programar qua $color_fg_none 
+	  "
+	else
+          tarefasde $complemento | awk 'FNR==1' > /tmp/.dia_buscado;
+          tarefasde $complemento | ag -i --nocolor "$1" > /tmp/.resultado_da_busca;
+          if [[ $( cat /tmp/.resultado_da_busca ) == '' ]];then
+	    echo -e "$color_fg_lightPink Não foi possível encontrar $color_bg_purple$color_fg_lightYellow$1$color_fg_none$color_fg_lightPink entre as tarefas de $color_bg_purple$color_fg_lightYellow$complemento$color_fg_none$color_fg_lightBlue \n  -tente outro termo $color_fg_none" 
+          else
+	    echo -e "  $color_fg_lightYellow$color_bg_purple ${1^} $color_fg_none in$( cat /tmp/.dia_buscado | cut -f1 -d-)"
+	  cat /tmp/.resultado_da_busca
+          fi
+	fi
+fi
+

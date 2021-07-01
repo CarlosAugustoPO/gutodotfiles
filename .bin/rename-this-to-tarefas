@@ -1,0 +1,119 @@
+#!/bin/bash
+
+#FG Colours
+color_fg_none="\e[0m"
+color_fg_lightGreen="\e[38;5;47m"
+color_fg_lightBlue="\e[38;5;75m"
+color_fg_lightYellow="\e[38;5;229m"
+color_fg_lightPink="\e[38;5;211m"
+color_fg_lightPurple="\e[38;5;163m"
+color_fg_red="\e[38;5;196m"
+
+#BG Colours
+color_bg_purple="\e[48;5;54m"
+
+#Theme Colours
+color_title="$color_fg_lightYellow"
+color_hora_ini="$color_fg_lightGreen"
+color_hora_fin="$color_fg_lightPink"
+color_job="$color_fg_lightBlue"
+
+##Segunda Feira
+
+echo -e "\
+$color_title Monday - Daily Routine $color_fg_none
+  $color_hora_ini 05:30 $color_fg_none-$color_hora_fin 06:00 $color_job weak up                                $color_fg_none
+  $color_hora_ini 06:00 $color_fg_none-$color_hora_fin 07:30 $color_job task 1                              $color_fg_none
+  $color_hora_ini 07:30 $color_fg_none-$color_hora_fin 08:40 $color_job task 2
+  $color_hora_ini 08:40 $color_fg_none-$color_hora_fin 12:20 $color_job task 3 
+  $color_hora_ini 12:20 $color_fg_none-$color_hora_fin 13:50 $color_job task 4
+  $color_hora_ini 13:50 $color_fg_none-$color_hora_fin 16:15 $color_job task 5
+  $color_hora_ini 18:50 $color_fg_none-$color_hora_fin 21:00 $color_job task 6
+  $color_hora_ini 21:00 $color_fg_none-$color_hora_fin 22:30 $color_job task 7
+  $color_hora_ini 22:30 $color_fg_none-$color_hora_fin 23:20 $color_job sleep
+$color_title EndOfMonday $color_fg_none
+"
+
+echo -e "\
+$color_title Tuesday - Daily Routine $color_fg_none
+  $color_hora_ini 05:30 $color_fg_none-$color_hora_fin 06:00 $color_job weak up                                $color_fg_none
+  $color_hora_ini 06:00 $color_fg_none-$color_hora_fin 07:30 $color_job task 1                              $color_fg_none
+  $color_hora_ini 07:30 $color_fg_none-$color_hora_fin 08:40 $color_job task 2
+  $color_hora_ini 08:40 $color_fg_none-$color_hora_fin 12:20 $color_job task 3 
+  $color_hora_ini 12:20 $color_fg_none-$color_hora_fin 13:50 $color_job task 4
+  $color_hora_ini 13:50 $color_fg_none-$color_hora_fin 16:15 $color_job task 5
+  $color_hora_ini 18:50 $color_fg_none-$color_hora_fin 21:00 $color_job task 6
+  $color_hora_ini 21:00 $color_fg_none-$color_hora_fin 22:30 $color_job task 7
+  $color_hora_ini 22:30 $color_fg_none-$color_hora_fin 23:20 $color_job sleep
+$color_title EndOfTuesday $color_fg_none
+"
+
+echo -e "\
+$color_title Wednesday - Daily Routine $color_fg_none
+  $color_hora_ini 05:30 $color_fg_none-$color_hora_fin 06:00 $color_job weak up                                $color_fg_none
+  $color_hora_ini 06:00 $color_fg_none-$color_hora_fin 07:30 $color_job task 1                              $color_fg_none
+  $color_hora_ini 07:30 $color_fg_none-$color_hora_fin 08:40 $color_job task 2
+  $color_hora_ini 08:40 $color_fg_none-$color_hora_fin 12:20 $color_job task 3 
+  $color_hora_ini 12:20 $color_fg_none-$color_hora_fin 13:50 $color_job task 4
+  $color_hora_ini 13:50 $color_fg_none-$color_hora_fin 16:15 $color_job task 5
+  $color_hora_ini 18:50 $color_fg_none-$color_hora_fin 21:00 $color_job task 6
+  $color_hora_ini 21:00 $color_fg_none-$color_hora_fin 22:30 $color_job task 7
+  $color_hora_ini 22:30 $color_fg_none-$color_hora_fin 23:20 $color_job sleep
+$$color_title EndOfWednesday $color_fg_none
+"
+
+echo -e "\
+$color_title Thursday - Daily Routine $color_fg_none
+  $color_hora_ini 05:30 $color_fg_none-$color_hora_fin 06:00 $color_job weak up                                $color_fg_none
+  $color_hora_ini 06:00 $color_fg_none-$color_hora_fin 07:30 $color_job task 1                              $color_fg_none
+  $color_hora_ini 07:30 $color_fg_none-$color_hora_fin 08:40 $color_job task 2
+  $color_hora_ini 08:40 $color_fg_none-$color_hora_fin 12:20 $color_job task 3 
+  $color_hora_ini 12:20 $color_fg_none-$color_hora_fin 13:50 $color_job task 4
+  $color_hora_ini 13:50 $color_fg_none-$color_hora_fin 16:15 $color_job task 5
+  $color_hora_ini 18:50 $color_fg_none-$color_hora_fin 21:00 $color_job task 6
+  $color_hora_ini 21:00 $color_fg_none-$color_hora_fin 22:30 $color_job task 7
+  $color_hora_ini 22:30 $color_fg_none-$color_hora_fin 23:20 $color_job sleep
+$color_title EndOfThursday $color_fg_none
+"
+
+echo -e "\
+$color_title Friday - Daily Routine $color_fg_none
+  $color_hora_ini 05:30 $color_fg_none-$color_hora_fin 06:00 $color_job weak up                                $color_fg_none
+  $color_hora_ini 06:00 $color_fg_none-$color_hora_fin 07:30 $color_job task 1                              $color_fg_none
+  $color_hora_ini 07:30 $color_fg_none-$color_hora_fin 08:40 $color_job task 2
+  $color_hora_ini 08:40 $color_fg_none-$color_hora_fin 12:20 $color_job task 3 
+  $color_hora_ini 12:20 $color_fg_none-$color_hora_fin 13:50 $color_job task 4
+  $color_hora_ini 13:50 $color_fg_none-$color_hora_fin 16:15 $color_job task 5
+  $color_hora_ini 18:50 $color_fg_none-$color_hora_fin 21:00 $color_job task 6
+  $color_hora_ini 21:00 $color_fg_none-$color_hora_fin 22:30 $color_job task 7
+  $color_hora_ini 22:30 $color_fg_none-$color_hora_fin 23:20 $color_job sleep
+$color_title EndOfFriday $color_fg_none
+"
+
+echo -e "\
+$color_title Saturday - Daily Routine $color_fg_none
+  $color_hora_ini 05:30 $color_fg_none-$color_hora_fin 06:00 $color_job weak up                                $color_fg_none
+  $color_hora_ini 06:00 $color_fg_none-$color_hora_fin 07:30 $color_job task 1                              $color_fg_none
+  $color_hora_ini 07:30 $color_fg_none-$color_hora_fin 08:40 $color_job task 2
+  $color_hora_ini 08:40 $color_fg_none-$color_hora_fin 12:20 $color_job task 3 
+  $color_hora_ini 12:20 $color_fg_none-$color_hora_fin 13:50 $color_job task 4
+  $color_hora_ini 13:50 $color_fg_none-$color_hora_fin 16:15 $color_job task 5
+  $color_hora_ini 18:50 $color_fg_none-$color_hora_fin 21:00 $color_job task 6
+  $color_hora_ini 21:00 $color_fg_none-$color_hora_fin 22:30 $color_job task 7
+  $color_hora_ini 22:30 $color_fg_none-$color_hora_fin 23:20 $color_job sleep
+$color_title EndOfSaturday $color_fg_none
+"
+
+echo -e "\
+$color_title Sunday - Daily Routine $color_fg_none
+  $color_hora_ini 05:30 $color_fg_none-$color_hora_fin 06:00 $color_job weak up                                $color_fg_none
+  $color_hora_ini 06:00 $color_fg_none-$color_hora_fin 07:30 $color_job task 1                              $color_fg_none
+  $color_hora_ini 07:30 $color_fg_none-$color_hora_fin 08:40 $color_job task 2
+  $color_hora_ini 08:40 $color_fg_none-$color_hora_fin 12:20 $color_job task 3 
+  $color_hora_ini 12:20 $color_fg_none-$color_hora_fin 13:50 $color_job task 4
+  $color_hora_ini 13:50 $color_fg_none-$color_hora_fin 16:15 $color_job task 5
+  $color_hora_ini 18:50 $color_fg_none-$color_hora_fin 21:00 $color_job task 6
+  $color_hora_ini 21:00 $color_fg_none-$color_hora_fin 22:30 $color_job task 7
+  $color_hora_ini 22:30 $color_fg_none-$color_hora_fin 23:20 $color_job sleep
+$color_title EndOfSunday $color_fg_none
+"

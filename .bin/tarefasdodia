@@ -1,0 +1,9 @@
+#!/bin/bash
+
+dia="$(date +%A)"
+
+tarefas |\
+awk "/$dia/{flag=1} flag; /EndOf$dia/{flag=0}" |\
+sed "s/End$dia//g" > /tmp/.tarefasdodia;\
+cat /tmp/.tarefasdodia;
+rm -f /tmp/.tarefasdodia.

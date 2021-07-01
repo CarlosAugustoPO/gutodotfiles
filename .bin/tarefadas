@@ -1,0 +1,77 @@
+#!/bin/bash
+#FG Colours
+color_fg_none="\e[0m"
+color_fg_lightGreen="\e[38;5;47m"
+color_fg_lightBlue="\e[38;5;75m"
+color_fg_lightYellow="\e[38;5;229m"
+color_fg_lightPink="\e[38;5;211m"
+color_fg_red="\e[38;5;196m"
+color_fg_orange="\e[38;5;208m"
+
+color_fg_lightPurple="\e[38;5;163m"
+color_bg_purple="\e[48;5;54m"
+
+horaalvo="$1"
+diaalvo="$2"
+size=${#horaalvo}
+
+if [[ "$horaalvo" == "" ]] || ([[ $size != 2 ]] && [[ $size != 5 ]]); then
+echo -e "\
+$color_fg_lightYellow Por favor selecione um horário válido $color_fg_none
+$color_fg_lightBlue  Ex 1:$color_fg_lightYellow$ tarefadas$color_fg_lightGreen 09:10 $color_fg_none
+$color_fg_lightBlue  Ex 2:$color_fg_lightYellow$ tarefadas$color_fg_lightGreen 09 $color_fg_none"
+else
+
+#dia="$(date +%A)"
+
+  if [[ $diaalvo == "" ]]; then
+    diaalvo="hoj"
+  fi
+
+tarefasde $diaalvo | awk "\$2 < \"$horaalvo\"" > /tmp/.tarefas_anteriores;
+cat /tmp/.tarefas_anteriores | tail -1 > /tmp/.ultima_tarefa_anterior;
+tarefasde $diaalvo | awk "\$2 > \"$horaalvo\" && \$2 !~ \"[a]\" " | awk 'FNR==1' > /tmp/.proxima_tarefa
+tarefasde $diaalvo | awk "\$2 !~ \"[a]\" " | tail -1 > /tmp/.ultima_tarefa_do_dia
+tarefasde ama | awk 'FNR==2' > /tmp/.primeira_tarefa;
+tarefasde $diaalvo | awk 'FNR==1' > /tmp/.dia_alvo;
+ultima_tarefa_anterior="cat /tmp/.ultima_tarefa_anterior"
+proxima_tarefa="cat /tmp/.proxima_tarefa"
+
+if [ "$( cat /tmp/.proxima_tarefa )" == '' ]; then
+	proxima_tarefa_final='cat /tmp/.primeira_tarefa'
+else
+        proxima_tarefa_final='cat /tmp/.proxima_tarefa'
+fi
+
+if [ "$( cat /tmp/.tarefas_anteriores )" == '' ]; then
+	ultima_tarefa_anterior_final='cat /tmp/.ultima_tarefa_do_dia'
+else
+        ultima_tarefa_anterior_final='cat /tmp/.ultima_tarefa_anterior'
+fi
+
+if [[ "${diaalvo}" != "hoj" ]] && [[ "${diaalvo}" != "ama" ]] && [[ "${diaalvo}" != "ont" ]] && [[ "${diaalvo}" != "seg" ]] && [[ "${diaalvo}" != "ter" ]] && [[ "${diaalvo}" != "qua" ]] && [[ "${diaalvo}" != "qui" ]] && [[ "${diaalvo}" != "sex" ]] && [[ "${diaalvo}" != "sab" ]] && [[ "${diaalvo}" != "dom" ]]; then
+	  echo -e "\
+
+$color_fg_lightYellow Por favor use três letras para epecificar o dia
+
+$color_fg_lightBlue Opções:
+$color_fg_lightGreen hoj $color_fg_lightPink #Exibe as tarefas de hoje ($(date | awk '{print $1}'))
+$color_fg_lightGreen ama $color_fg_lightPink #Exibe as tarefas de amanhã ($(date -d "+1 days" | awk '{print $1}'))
+$color_fg_lightGreen ont $color_fg_lightPink #Exibe as tarefas de ontem ($(date -d "-1 days" | awk '{print $1}'))
+$color_fg_lightGreen seg $color_fg_lightPink #Exibe as tarefas de Segunda
+$color_fg_lightGreen ter $color_fg_lightPink #Exibe as tarefas de Terça
+$color_fg_lightGreen qua $color_fg_lightPink #Exibe as tarefas de Quarta
+$color_fg_lightGreen qui $color_fg_lightPink #Exibe as tarefas de Quinta
+$color_fg_lightGreen sex $color_fg_lightPink #Exibe as tarefas de Sexta
+$color_fg_lightGreen sab $color_fg_lightPink #Exibe as tarefas de Sábado
+$color_fg_lightGreen dom $color_fg_lightPink #Exibe as tarefas de Domingo
+
+$color_fg_lightBlue Ex:$color_fg_lightYellow$ horade$color_fg_lightGreen programar qua $color_fg_none
+"
+else
+  echo -e "$color_fg_lightYellow Tarefa das $color_fg_lightYellow$color_bg_purple${1^}$color_fg_none in$( cat /tmp/.dia_alvo | cut -f1 -d-)"
+    $space $ultima_tarefa_anterior_final
+  echo -e "$color_fg_lightYellow Depois..."
+    $proxima_tarefa_final
+fi
+fi

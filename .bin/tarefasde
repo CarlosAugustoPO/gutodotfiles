@@ -1,0 +1,64 @@
+#!/bin/bash
+
+#FG Colours
+color_fg_none="\e[0m"
+color_fg_lightGreen="\e[38;5;47m"
+color_fg_lightBlue="\e[38;5;75m"
+color_fg_lightYellow="\e[38;5;229m"
+color_fg_lightPink="\e[38;5;211m"
+color_fg_lightPurple="\e[38;5;163m"
+color_fg_red="\e[38;5;196m"
+
+#BG Colours
+color_bg_purple="\e[48;5;54m"
+
+amanha=$(date -d "+1 days" | awk '{print $1}' ) 
+dia="$@"
+
+echo -e "\
+  amanha $amanha
+  segunda Monday
+  terça Tuesday
+  quarta Wednesday
+  quinta Thursday
+  sexta Friday
+  sabado Saturday
+  domingo Sunday" > /tmp/.queryrotinade;
+
+if [[ "${dia}" != "hoj" ]] && [[ "${dia}" != "ama" ]] && [[ "${dia}" != "ont" ]] && [[ "${dia}" != "seg" ]] && [[ "${dia}" != "ter" ]] && [[ "${dia}" != "qua" ]] && [[ "${dia}" != "qui" ]] && [[ "${dia}" != "sex" ]] && [[ "${dia}" != "sab" ]] && [[ "${dia}" != "dom" ]]; then
+  echo -e "\
+  $color_fg_lightYellow Por favor especifique um dia
+    
+    $color_fg_lightBlue Opções:
+     $color_fg_lightGreen hoj $color_fg_lightPink #Exibe as tarefas de hoje ($(date | awk '{print $1}'))
+     $color_fg_lightGreen ama $color_fg_lightPink #Exibe as tarefas de amanhã ($(date -d "+1 days" | awk '{print $1}'))
+     $color_fg_lightGreen ont $color_fg_lightPink #Exibe as tarefas de ontem ($(date -d "-1 days" | awk '{print $1}'))
+     $color_fg_lightGreen seg $color_fg_lightPink #Exibe as tarefas de Segunda
+     $color_fg_lightGreen ter $color_fg_lightPink #Exibe as tarefas de Terça
+     $color_fg_lightGreen qua $color_fg_lightPink #Exibe as tarefas de Quarta
+     $color_fg_lightGreen qui $color_fg_lightPink #Exibe as tarefas de Quinta
+     $color_fg_lightGreen sex $color_fg_lightPink #Exibe as tarefas de Sexta
+     $color_fg_lightGreen sab $color_fg_lightPink #Exibe as tarefas de Sábado
+     $color_fg_lightGreen dom $color_fg_lightPink #Exibe as tarefas de Domingo
+      
+  $color_fg_lightBlue Ex:$color_fg_lightYellow$ tarefasde$color_fg_lightGreen qua $color_fg_none 
+  "
+else
+
+  if [ "$dia" == "ama" ]; then
+    diaen=$(date -d "+1 days" +%A )
+  elif [ "$dia" == "ont" ]; 
+  then
+    diaen=$(date -d "-1 days" +%A ) 
+  elif [ "$dia" == "hoj" ];
+  then
+    diaen=$(date +%A ) 
+  else
+    diaen=$(cat /tmp/.queryrotinade | ag -i --nocolor $dia | awk '{ print $2 }')
+  fi
+  
+ tarefas |\
+    awk "/$diaen/{flag=1} flag; /EndOf$diaen/{flag=0}" |\
+      sed "s/End$diaen//g" > /tmp/.dailyroutine;\
+  cat /tmp/.dailyroutine
+fi
