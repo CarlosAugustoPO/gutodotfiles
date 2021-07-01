@@ -110,7 +110,7 @@ alias rmmod='git update-index --assume-unchanged' #usage rmtrack file
 
 # Edit in vim
 alias ebashrc="vim $HOME/.bashrc"
-alias etarefas="vim $HOME/Projects/myRoutine/tarefas"
+alias etarefas="vim $HOME/.bin/tarefas"
 alias etmux="vim $HOME/.tmux.conf"
 alias evimrc="vim $HOME/.vimrc"
 alias etodo="vim $HOME/Documents/notes/TODO.md"
