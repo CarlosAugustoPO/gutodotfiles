@@ -1,3 +1,8 @@
+
+xdgopen(){
+ xdg-open 2>/dev/null $1 &
+}
+
 # Auto ls when change directory
 cd(){
     builtin cd "$@";\
